@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Blog</title>
+    <style>
+        
+        .details {
+            position: relative;
+            background: #d498fc;
+            width: 500px;
+           
+        }
+        .delete {
+           
+            position: absolute;
+            background-color: rgb(6, 12, 94);
+            top: 10px;
+            right: 10px;
+            padding: 8px;
+            border-radius: 50%;
+          }
+        .delete img {
+            width: 24px; /* Adjust this size as needed */
+            height: 24px;
+        }  
+        .delete:hover {
+            cursor: pointer;
+            box-shadow: 1px 2px 3px rgba(0, 0, 0,2);
+        }  
+
+    </style>
+</head>
+<body> 
+    
+    <div class="details content">
+        <h1><%= title %></h1>
+        <h2><%= blog.title %></h2>
+        <div class="content">
+            <p><%= blog.body %></h3>
+       </div>
+       <a class="delete" data-doc="<%= blog._id %>">
+        <img src="/image/trush.png" alt="Delete Icon">
+       </a>        
+    </div>
+
+    <script>
+        document.querySelectorAll('a.delete').forEach(trashcan => {
+            trashcan.addEventListener('click', (e) => {
+                e.preventDefault();  // Prevent default navigation
+        
+                const blogId = trashcan.dataset.doc;  // Get the blog ID from data-doc
+                const endpoint = `/blogs/${blogId}`;  // Correct URL with blog ID
+        
+                fetch(endpoint, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.redirect) {
+                        window.location.href = data.redirect;  // Redirect if server provides redirect URL
+                    } else {
+                        alert('Error: Failed to redirect.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));  // Handle any errors
+            });
+        });
+    </script>
+
+</body>
+</html>

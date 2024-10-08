@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Blogs</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .single {
+            margin-bottom: 20px; /* Add space between each blog entry */
+            padding: 10px; /* Add padding for better spacing */
+            border: 1px solid #ccc; /* Optional border for visual separation */
+        }
+        
+        .single a {
+            text-decoration: none; /* Remove underline from links */
+            color: #000; /* Default link color */
+        }
+        
+        .single a:visited {
+            color: #000; /* Maintain color for visited links */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="blog content">
+        <% if (blogs.length > 0) { %>
+            <% blogs.forEach(blog => { %>
+                <div class="single">
+                    <a href="/blogs/<%= blog._id %>">  
+                        <h2><%= blog.title %></h2>  
+                        <p><strong>Snippet:</strong> <%= blog.snippet %></p>
+                        <p><strong>Body:</strong> <%= blog.body %></p>
+                    </a>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No blogs found.</p>
+        <% } %>
+    </div>
+    
+    
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!-- views/create.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog Post</title>
+</head>
+<body>
+    <h1>Create Blog Post</h1>
+    <form action="/blogs" method="POST"> <!-- Changed to /blogs and method="POST" -->
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        
+        <label for="snippet">Snippet:</label> <!-- Changed the 'for' attribute to match the input -->
+        <input type="text" id="snippet" name="snippet" required>
+        
+        <label for="body">Body:</label>
+        <textarea id="body" name="body" required></textarea>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <a href="/">Go back Home</a> <!-- Optional: A link to go back to home -->
+</body>
+</html>
